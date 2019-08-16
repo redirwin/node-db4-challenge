@@ -13,6 +13,16 @@ router.get("/recipes", async (req, res) => {
   }
 });
 
+router.get("/recipes/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipe = await helpers.getRecipe(id);
+    res.json(recipe);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get recipes" });
+  }
+});
+
 router.get("/recipes/:id/shoppingList", async (req, res) => {
   try {
     const list = await helpers.getShoppingList(req.params.id);
