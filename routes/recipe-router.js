@@ -13,12 +13,18 @@ router.get("/recipes", async (req, res) => {
   }
 });
 
-router.get("/recipes/:id/shoppingList", async (req, res) => {});
+router.get("/recipes/:id/shoppingList", async (req, res) => {
+  try {
+    const list = await helpers.getShoppingList(req.params.id);
+    res.json(list);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get shopping list." });
+  }
+});
 
 router.get("/recipes/:id/instructions", async (req, res) => {
-  const { id } = req.params;
   try {
-    const steps = await helpers.getInstructions(id);
+    const steps = await helpers.getInstructions(req.params.id);
     res.json(steps);
   } catch (err) {
     res.status(500).json({ message: "Failed to get recipe instructions." });

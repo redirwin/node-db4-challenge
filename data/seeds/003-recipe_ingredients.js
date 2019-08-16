@@ -31,7 +31,7 @@ exports.seed = function(knex) {
           id: 4,
           recipe_id: 2,
           ingredient_id: 4,
-          amount: 1,
+          amount: 0.5,
           unit: "tbsp"
         },
         {
@@ -46,7 +46,7 @@ exports.seed = function(knex) {
           recipe_id: 2,
           ingredient_id: 6,
           amount: 2,
-          unit: "leafs"
+          unit: "leaves"
         },
         {
           id: 7,
