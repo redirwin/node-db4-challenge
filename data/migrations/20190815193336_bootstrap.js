@@ -32,10 +32,15 @@ exports.up = function(knex) {
         .inTable("ingredients")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl.float("ingredient_amount", 2).notNullable();
+      tbl.float("amount", 2).notNullable();
+      tbl.string("unit", 50).notNullable();
     })
     .createTable("steps", tbl => {
       tbl.increments();
+      tbl
+        .integer("step_number")
+        .unsigned()
+        .notNullable();
       tbl
         .string("description", 2000)
         .notNullable()
@@ -53,6 +58,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists("steps")
     .dropTableIfExists("recipe_ingredients")
     .dropTableIfExists("ingredients")
     .dropTableIfExists("recipes");
