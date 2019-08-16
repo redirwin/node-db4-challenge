@@ -17,7 +17,9 @@ router.get("/recipes/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const recipe = await helpers.getRecipe(id);
-    res.json(recipe);
+    const list = await helpers.getShoppingList(id);
+    const steps = await helpers.getInstructions(id);
+    res.json({ recipe, list, steps });
   } catch (err) {
     res.status(500).json({ message: "Failed to get recipes" });
   }
